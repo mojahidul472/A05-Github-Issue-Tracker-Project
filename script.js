@@ -69,15 +69,15 @@ function render(data) {
             </div>
 
             <div class="mt-auto px-6 pb-6">
-                <hr class="border-gray-100 mb-4 -mx-6">
+                <hr class="border-[#E4E4E7] mb-4 -mx-6">
                 <div class="flex justify-between items-start text-[11px]">
                     <div class="space-y-1.5">
-                        <p class="text-slate-400">#${item.id} by <span class="text-slate-600 font-medium">${item.author}</span></p>
-                        <p class="text-slate-400">Assignee: <span class="text-slate-700 font-bold">${item.assignee || 'Unassigned'}</span></p>
+                        <p class="text-[#64748B]">#${item.id} by <span class="text-[#64748B] font-medium">${item.author}</span></p>
+                        <p class="text-[#64748B]">Assignee: <span class="text-[#64748B] font-bold">${item.assignee || 'Unassigned'}</span></p>
                     </div>
                     <div class="text-right space-y-1.5">
-                        <p class="text-slate-600 font-bold">${new Date(item.createdAt).toLocaleDateString()}</p>
-                        <p class="text-slate-400 italic">Updated: ${new Date(item.updatedAt).toLocaleDateString()}</p>
+                        <p class="text-[#64748B] font-bold">${new Date(item.createdAt).toLocaleDateString()}</p>
+                        <p class="text-[#64748B]">Updated: ${new Date(item.updatedAt).toLocaleDateString()}</p>
                     </div>
                 </div>
             </div>
@@ -86,45 +86,45 @@ function render(data) {
     }).join('');
 }
 
-// ৩. ডিটেইলস দেখার ফাংশন (Modal)
+// Details dekhano function
 async function openDetails(id) {
     try {
         const res = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issue/" + id);
         const { data } = await res.json();
         
         const p = data.priority.toLowerCase();
-        let pBg = p === 'high' ? 'bg-[#FF5C5C]' : (p === 'medium' ? 'bg-[#FFA117]' : 'bg-[#0EA5E9]');
+        let pBg = p === 'high' ? 'bg-[#EF4444]' : (p === 'medium' ? 'bg-[#EF4444]' : 'bg-[#4A00FF]');
 
         document.getElementById('modal-data').innerHTML = `
-            <h2 class="text-2xl font-bold text-[#1E293B] mb-3">${data.title}</h2>
+            <h2 class="text-2xl font-bold text-[#1F2937] mb-3">${data.title}</h2>
             
-            <div class="flex items-center gap-2 mb-4 text-[13px] text-slate-500">
-                <span class="px-3 py-1 bg-[#00A96E] text-white font-bold rounded-full capitalize">Opened</span>
+            <div class="flex items-center gap-2 mb-4 text-[13px] text-[#64748B]">
+                <span class="px-3 py-1 bg-[#00A96E] text-[#FFFF] font-bold rounded-full capitalize">Opened</span>
                 <span>• Opened by ${data.author} • ${new Date(data.createdAt).toLocaleDateString()}</span>
             </div>
 
             <div class="flex flex-wrap gap-2 mb-6">
                 ${(data.labels || []).map(label => {
-                    let lStyle = label.toLowerCase().includes('bug') ? "bg-[#FFEDED] text-[#FF5C5C] border-[#FFDADA]" : "bg-[#FFF8E6] text-[#FFA117] border-[#FFE9B3]";
+                    let lStyle = label.toLowerCase().includes('bug') ? "bg-[#FEECEC] text-[#EF4444] border-[#FECACA]" : "bg-[#FFF8DB] text-[#D97706] border-[#FDE68A]";
                     return `<span class="text-[11px] font-bold px-3 py-1 rounded-lg border uppercase ${lStyle}">${label}</span>`;
                 }).join('')}
             </div>
 
-            <p class="text-slate-600 text-[15px] leading-relaxed mb-8">${data.description}</p>
+            <p class="text-[#64748B] text-[15px] leading-relaxed mb-8">${data.description}</p>
             
-            <div class="grid grid-cols-2 gap-4 p-6 bg-[#F8FAFC] rounded-2xl mb-8 border border-slate-100">
+            <div class="grid grid-cols-2 gap-4 p-6 bg-[#F8FAFC] rounded-2xl mb-8 ">
                 <div>
-                    <p class="text-[12px] text-slate-400 font-medium mb-1">Assignee:</p>
-                    <p class="font-bold text-slate-800 text-lg">${data.assignee || 'Unassigned'}</p>
+                    <p class="text-[12px] text-[#64748B] font-medium mb-1">Assignee:</p>
+                    <p class="font-bold text-[#1F2937] text-lg">${data.assignee || 'Unassigned'}</p>
                 </div>
                 <div>
-                    <p class="text-[12px] text-slate-400 font-medium mb-1">Priority:</p>
+                    <p class="text-[12px] text-[#64748B] font-medium mb-1">Priority:</p>
                     <span class="px-4 py-1.5 ${pBg} text-white text-[11px] font-bold rounded-full uppercase inline-block shadow-sm">${data.priority}</span>
                 </div>
             </div>
 
             <div class="flex justify-end">
-                <button onclick="issue_modal.close()" class="bg-[#4F46E5] hover:bg-[#4338CA] text-white px-10 py-3 rounded-xl font-bold shadow-lg transition-all active:scale-95 text-sm uppercase tracking-wider">
+                <button onclick="issue_modal.close()" class="bg-[#4A00FF] hover:bg-[#4338CA] text-white px-10 py-3 rounded-xl font-bold shadow-lg transition-all active:scale-95 text-sm uppercase tracking-wider">
                     Close
                 </button>
             </div>

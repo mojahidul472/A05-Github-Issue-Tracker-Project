@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Issues Tracker</title>
+    <!-- daisyui link  -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        .active-tab { background-color: #4A00FF !important; color: white !important; border: none !important; }
+        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    </style>
+</head>
+<body class="bg-[#F1F5F9] min-h-screen">
+    <nav class="navbar bg-white px-6  border-b shadow-sm">
+        <div class="flex-1 font-bold text-xl text-[#1F2937]">GitHub Issues Tracker</div>
+        <div class="join gap-2">
+            <input id="searchInput" class="input input-bordered join-item input-sm" placeholder="Search issues..." />
+            <button onclick="handleSearch()" class="btn btn-sm btn-primary join-item ">Search</button>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto p-6">
+        <div class="flex gap-2 mb-6">
+            <button class="btn btn-sm px-8 bg-white text-[#64748B] tab-btn active-tab" onclick="changeTab('all', this)">All</button>
+            <button class="btn btn-sm px-8 bg-white text-[#64748B] tab-btn" onclick="changeTab('open', this)">Open</button>
+            <button class="btn btn-sm px-8 bg-white text-[#64748B] tab-btn" onclick="changeTab('closed', this)">Closed</button>
+        </div>
+
+        <div class="bg-white p-4 rounded-xl shadow-sm mb-6 flex justify-between items-center border">
+            <div class="flex items-center gap-3">
+                <div class="p-2 bg-indigo-100 rounded-full text-indigo-600 font-bold">
+                    <img src="assets/Aperture.png" alt="">
+                </div>
+                <div>
+                    <h2 class="font-bold text-[#1F2937]"><span id="issueCount">0</span> Issues</h2>
+                    <p class="text-xs text-[#64748B]">Track and manage project issues</p>
+                </div>
+            </div>
+            <div class="flex gap-4 text-xs font-bold text-gray-500">
+                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#00A96E]"></span> Open</span>
+                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#A855F7]"></span> Closed</span>
+            </div>
+        </div>
+
+        <div id="loader" class="hidden text-center py-10"><span class="loading loading-spinner text-primary"></span></div>
+        <div id="issue-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+    </main>
+
+    <dialog id="issue_modal" class="modal">
+        <div class="modal-box max-w-2xl bg-white p-8 rounded-2xl">
+            <div id="modal-data"></div>
+        </div>
+        <form method="dialog" class="modal-backdrop"><button>close</button></form>
+    </dialog>
+
+    <script src="script.js"></script>
+</body>
+</html>

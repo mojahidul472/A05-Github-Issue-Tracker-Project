@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Issues Tracker - Login</title>
+    <!-- daisyui link -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+</head>
+<body class="bg-[#FFFFFF] flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-md p-8 bg-white rounded-xl shadow-lg border border-[#E4E4E7] text-center">
+        <div class="flex justify-center mb-4">
+            <img src="assets/github-logo.png" alt="GitHub" class="w-20 h-20">
+        </div>
+        <h1 class="text-2xl font-bold text-gray-800">GitHub Issues Tracker</h1>
+        <p class="text-gray-400 text-sm mb-8">Sign in to manage your issues</p>
+
+        <form id="loginForm" class="text-left">
+            <div class="form-control mb-4">
+                <label class="label font-semibold text-[#1F2937]">Username</label>
+                <input type="text" id="username" placeholder="Enter Username" class="input input-bordered w-full bg-[#F8FAFC]" required />
+                <span class="text-[10px] text-[#4A00FF] mt-1">Default: admin</span>
+            </div>
+            <div class="form-control mb-6">
+                <label class="label font-semibold text-[#1F2937]">Password</label>
+                <input type="password" id="password" placeholder="Enter Password" class="input input-bordered w-full bg-[#F8FAFC]" required />
+                <span class="text-[10px] text-[#4A00FF] mt-1">Default: admin123</span>
+            </div>
+            <button type="submit" class="btn btn-primary w-full bg-[#4A00FF] hover:bg-[#4338CA] border-none text-white font-bold py-3 rounded-lg">Sign In</button>
+        </form>
+
+        <div class="divider text-[#1F2937] text-xs my-6 uppercase">OR</div>
+
+        <div class="bg-[#F8FAFC] p-4 rounded-lg">
+            <p class="text-[10px] font-bold text-[#64748B] mb-2 ">Demo Credentials:</p>
+            <p class="text-sm font-bold text-[#64748B]">Username: <span class="font-normal">admin</span></p>
+            <p class="text-sm font-bold text-[#64748B]">Password: <span class="font-normal">admin123</span></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            if(document.getElementById('username').value === 'admin' && document.getElementById('password').value === 'admin123') {
+                localStorage.setItem('loggedIn', 'true');
+                window.location.href = 'main.html';
+            } else { alert('Wrong credentials!'); }
+        });
+    </script>
+</body>
+</html>
+
+

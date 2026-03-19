@@ -1,6 +1,6 @@
 let issuesData = [];
 
-// ১. ডাটা ফেচ করার ফাংশন
+//1. data featch kora
 async function fetchAll() {
     toggleLoader(true);
     try {
@@ -15,7 +15,7 @@ async function fetchAll() {
     }
 }
 
-// ২. কার্ড রেন্ডার করার মেইন ফাংশন
+// 2. card render kora
 function render(data) {
     const container = document.getElementById('issue-container');
     const countEl = document.getElementById('issueCount');
@@ -26,44 +26,43 @@ function render(data) {
     container.innerHTML = data.map(item => {
         const p = item.priority.toLowerCase();
         
-        // কালার এবং আইকন লজিক (তোর ছবি অনুযায়ী)
+        // color and icon set
         let pClass = "";
         let leftIconColor = "";
         let leftIcon = "";
 
         if (p === 'high') {
-            pClass = 'text-[#C53030] bg-[#FFF5F5] border-[#FEB2B2]';
-            leftIconColor = "text-[#C53030]";
+            pClass = 'text-[#EF4444] bg-[#FEECEC] border-[#FEECEC]';
+            leftIconColor = "text-[#EF4444]";
             leftIcon = `<img src="assets/Open-Status.png" class="w-5 h-5 object-contain" alt="High">`;
         } else if (p === 'medium') {
-            pClass = 'text-[#B7791F] bg-[#FFFFF0] border-[#F6E05E]';
-            leftIconColor = "text-[#38A169]";
+            pClass = 'text-[#F59E0B] bg-[#FFF6D1] border-[#FFF6D1]';
+            leftIconColor = "text-[#F59E0B]";
             leftIcon = `<img src="assets/Open-Status.png" class="w-5 h-5 object-contain" alt="High">`;
         } else {
-            // Low এর জন্য টিক মার্ক
-            pClass = 'text-[#2B6CB0] bg-[#EBF8FF] border-[#90CDF4]';
-            leftIconColor = "text-[#2B6CB0]";
+            pClass = 'text-[#9CA3AF] bg-[#EEEFF2] border-[#EEEFF2]';
+            leftIconColor = "text-[#9CA3AF]";
             leftIcon = `<img src="assets/Closed- Status .png" class="w-5 h-5 object-contain" alt="High">`;
         }
 
         return `
-        <div onclick="openDetails('${item.id}')" class="card bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-all cursor-pointer flex flex-col h-full border-t-4 ${item.status === 'open' ? 'border-t-[#00A96E]' : 'border-t-purple-500'}">
+        <div onclick="openDetails('${item.id}')" class="card bg-[#ffff] border border-[#E4E4E7] rounded-2xl shadow-sm hover:shadow-md transition-all cursor-pointer flex flex-col h-full border-t-4 ${item.status === 'open' ? 'border-t-[#00A96E]' : 'border-t-[#A855F7]'}">
             <div class="p-6 flex-grow flex flex-col">
                 <div class="flex justify-between items-center mb-5">
-                    <span class="p-1.5 rounded-full ${p === 'medium' ? 'bg-[#CBFADB]' : 'bg-gray-50'} ${leftIconColor}">
+                    <span class="p-1.5 rounded-full ${p === 'medium' ? '' : ''} ${leftIconColor}">
                         ${leftIcon}
                     </span>
                     <span class="text-[9px] font-bold px-2.5 py-1 rounded-full border uppercase ${pClass}">${item.priority}</span>
                 </div>
 
-                <h3 class="font-bold text-[16px] text-slate-800 mb-2 min-h-[40px] leading-tight">${item.title}</h3>
-                <p class="text-slate-500 text-[12px] mb-6 line-clamp-2 min-h-[36px]">${item.description}</p>
+                <h3 class="font-bold text-[16px] text-[#1F2937] mb-2 min-h-[40px] leading-tight">${item.title}</h3>
+                <p class="text-[#64748B] text-[12px] mb-6 line-clamp-2 min-h-[36px]">${item.description}</p>
                 
                 <div class="flex flex-row flex-wrap gap-2 mt-auto mb-2">
                     ${(item.labels || []).map(label => {
                         let lStyle = "bg-indigo-50 text-indigo-400 border-indigo-100";
-                        if(label.toLowerCase().includes('bug')) lStyle = "bg-[#FFEDED] text-[#FF5C5C] border-[#FFDADA]";
-                        if(label.toLowerCase().includes('enhancement')) lStyle = "bg-[#E0F2FE] text-[#0284C7] border-[#BAE6FD]";
+                        if(label.toLowerCase().includes('bug')) lStyle = "bg-[#FEECEC] text-[#EF4444] border-[#FECACA]";
+                        if(label.toLowerCase().includes('enhancement')) lStyle = "bg-[#FFF8DB] text-[#D97706] border-[#FDE68A]";
                         return `<span class="text-[9px] font-bold px-2 py-0.5 rounded-full border uppercase whitespace-nowrap ${lStyle}">● ${label}</span>`;
                     }).join('')}
                 </div>
